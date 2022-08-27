@@ -38,11 +38,13 @@ function App() {
     setSelectedTodo(todo);
     setInputVisility(true);
   }
+  //Lista todas as tarefas
   async function getTodos() {
     const response = await axios.get("http://localhost:3333/todos");
     setTodos(response.data);
     console.log(response.data);
   }
+  //Editar tarefas
   async function editTodo() {
     const response = await axios.put("http://localhost:3333/todos", {
       id: selectedTodo.id,
@@ -53,12 +55,14 @@ function App() {
     getTodos();
     setInputValue("");
   }
+  //Deletar tarefas
   async function deleteTodo(todo) {
     const response = await axios.delete(
       `http://localhost:3333/todos/${todo.id}`
     );
     getTodos();
   }
+  //Modificar status das tarefas
   async function modifyStatusTodo(todo) {
     const response = await axios.put("http://localhost:3333/todos", {
       id: todo.id,
@@ -66,7 +70,7 @@ function App() {
     });
     getTodos();
   }
-
+  //Criar nova tarefa
   async function createTodo() {
     const response = await axios.post("http://localhost:3333/todos", {
       name: inputValue,
@@ -75,6 +79,7 @@ function App() {
     setInputVisility(!inputVisbility);
     setInputValue("");
   }
+  ///
 
   const [todos, setTodos] = useState([]);
   const [inputValue, setInputValue] = useState("");
